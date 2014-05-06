@@ -2,6 +2,12 @@
 
 #include "ofMain.h"
 #include "ofxSimpleSerial.h"
+#include "ofxOsc.h"
+#include <Arduino.h>
+
+// listen on port 12345
+#define PORT 12345
+#define NUM_MSG_STRINGS 20
 
 class ofApp : public ofBaseApp{
 
@@ -22,4 +28,15 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+        ofTrueTypeFont font;
+        ofxOscReceiver receiver;
+    
+        int current_msg_string;
+        string msg_strings[NUM_MSG_STRINGS];
+        float timers[NUM_MSG_STRINGS];
+    
+        int mouseX, mouseY;
+        string mouseButtonState;
+    
+        Arduino arduino;
 };

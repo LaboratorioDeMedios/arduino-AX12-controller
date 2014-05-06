@@ -2,7 +2,19 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+	// listen on the given port
+	cout << "listening for osc messages on port " << PORT << "\n";
+	receiver.setup(PORT);
+    
+	current_msg_string = 0;
+	mouseX = 0;
+	mouseY = 0;
+	mouseButtonState = "";
+    
+	ofBackground(30, 30, 130);
+    
+    arduino = Arduino();
+    arduino.setup();
 }
 
 //--------------------------------------------------------------
