@@ -1,0 +1,209 @@
+//
+//  Arduino.cpp
+//  ax12OSCServer
+//
+//  Created by german on 4/24/14.
+//
+//
+
+#include "Arduino.h"
+
+#define		ANGLE_UNDEFINED		MAXCHAR
+#define		ANGLE_DEFAULT		0
+#define		KEY_UNDEFINED		""
+    
+	// required
+	static string	COM_PORT						= "COM3";
+    
+	static char		ANGLE_DEFAULT_1					= 0;
+	static char		ANGLE_DEFAULT_2					= 0;
+	static char		ANGLE_DEFAULT_4					= 0;
+	static char		ANGLE_DEFAULT_8					= 0;
+    
+	static int		ANGLE_MAX_1						= 30;
+	static int		ANGLE_MIN_1						= -30;
+	static int		ANGLE_MAX_2						= 127;
+	static int		ANGLE_MIN_2						= -127;
+	static int		ANGLE_MAX_4						= 10;
+	static int		ANGLE_MIN_4						= -70;
+    
+	// optional - for debug
+	static char		KEY_RESET						= 0;
+	static char		KEY_PRINT_STATUS				= 0;
+    
+	static int		ANGLE_STEP_FOR_KEY				= 4;
+	static char		KEY_ANGLE_1INC					= 0;
+	static char		KEY_ANGLE_1DEC					= 0;
+	static char		KEY_ANGLE_2INC					= 0;
+	static char		KEY_ANGLE_2DEC					= 0;
+	static char		KEY_ANGLE_4INC					= 0;
+	static char		KEY_ANGLE_4DEC					= 0;
+    
+	static unsigned long startTime;
+    
+	Arduino::Arduino()
+	{
+		angleMotor1 = 0;
+		angleMotor2 = 0;
+		angleMotor4 = 0;
+	}
+    
+	Arduino::~Arduino()
+	{
+		if (serial.available()){
+			serial.close();
+		}
+	}
+    
+	bool Arduino::setup()
+	{
+		angleMotor1 = ANGLE_DEFAULT_1;
+		angleMotor2 = ANGLE_DEFAULT_2;
+		angleMotor4 = ANGLE_DEFAULT_4;
+        
+		if (!serial.setup(0, 9600)) {
+			cout << "Error en setup del Serial, puerto COM: " << COM_PORT << endl;
+			//return false;
+		}
+        
+		cout << "Moviendo los motores" << endl;
+        
+		sendMotor((char) angleMotor1, ID_MOTOR_1);
+		sendMotor((char) angleMotor2, ID_MOTOR_2);
+		sendMotor((char) angleMotor4, ID_MOTOR_4);
+
+		return true;
+	}
+    
+	void Arduino::exit() {
+		if (serial.available()){
+			serial.close();
+		}
+	}
+    
+	void Arduino::update() {
+        
+
+	}
+    
+	void Arduino::draw() {
+
+	}
+    
+	void Arduino::keyPressed (int key) {
+        
+		bool debug = true;
+        
+		if (debug) {
+			switch (key)
+			{
+				case '0':
+					reset(true); // Vuelve a la posición inicial, resetea la matriz de transformación y no aplica ICP
+					break;
+			}
+			if (key == KEY_ANGLE_1INC) {
+				moveMotor(1,angleMotor1 + ANGLE_STEP_FOR_KEY);
+			} else if (key == KEY_ANGLE_1DEC) {
+				moveMotor(1,angleMotor1 - ANGLE_STEP_FOR_KEY);
+			} else if (key == KEY_ANGLE_2INC) {
+				moveMotor(2,angleMotor2 + ANGLE_STEP_FOR_KEY);
+			} else if (key == KEY_ANGLE_2DEC) {
+				moveMotor(2,angleMotor2 - ANGLE_STEP_FOR_KEY);
+			} else if (key == KEY_ANGLE_4INC) {
+				moveMotor(4,angleMotor4 + ANGLE_STEP_FOR_KEY);
+			} else if (key == KEY_ANGLE_4DEC) {
+				moveMotor(4,angleMotor4 - ANGLE_STEP_FOR_KEY);
+			}
+			else if (key == KEY_RESET) {
+				reset(false);
+			}
+			else if (key == KEY_PRINT_STATUS) {
+				cout << read() << endl;
+				cout << "motor 1: " << angleMotor1 << endl;
+				cout << "motor 2: " << angleMotor2 << endl;
+				cout << "motor 4: " << angleMotor4 << endl;
+			}
+		}
+	}
+    
+    
+	void Arduino::reset(bool forceReset)
+	{
+	}
+    
+	void Arduino::sendMotor(int value, int id)
+	{
+		if (value < 0){
+			value = -value;
+			value |= 1 << 7; //MAGIC!
+		}
+		char id_char = (char) id;
+		serial.writeByte(id_char);
+		serial.writeByte(value);
+	}
+    
+	char* Arduino::read()
+	{
+		char* result;
+		int byteCount = serial.available();
+		if (byteCount > 0) {
+			result = new char[byteCount];
+			unsigned char byteRead = 0;
+			int i = 0;
+			while(serial.readBytes(&byteRead, 1) > 0) {
+				result[i] = byteRead;
+				i++;
+			}
+			result[i] = 0;
+		}
+		else
+		{
+			result = new char[1];
+			result[0] = '\0';
+		}
+		return result;
+	}
+    
+	int Arduino::moveMotor(int motorId, signed int degrees)
+	{
+		int error = 1;
+		signed int angle1 = angleMotor1, angle2 = angleMotor2, angle4 = angleMotor4;
+        
+		if (motorId == ID_MOTOR_1)
+		{
+			if (!ofInRange(degrees, ANGLE_MIN_1, ANGLE_MAX_1))
+			{
+				return error;
+			}
+			else
+			{
+				angle1 = degrees;
+			}
+		}
+		if (motorId == ID_MOTOR_2)
+		{
+			if (!ofInRange(degrees, ANGLE_MIN_2, ANGLE_MAX_2))
+			{
+				return error;
+			}
+			else
+			{
+				angle2 = degrees;
+			}
+		}
+		if (motorId == ID_MOTOR_4)
+		{
+			if (!ofInRange(degrees, ANGLE_MIN_4, ANGLE_MAX_4))
+			{
+				return error;
+			}
+			else
+			{
+				angle4 = degrees;
+			}
+		}
+        
+		sendMotor(angleMotor1, ID_MOTOR_1);
+		sendMotor(angleMotor2, ID_MOTOR_2);
+		sendMotor(angleMotor4, ID_MOTOR_4);
+	}
