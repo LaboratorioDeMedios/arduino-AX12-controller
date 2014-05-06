@@ -1,1 +1,6 @@
 bin/
+ax12OSCServer.xcodeproj/project.xcworkspace/xcuserdata/german.xcuserdatad/UserInterfaceState.xcuserstate
+ax12OSCServer.xcodeproj/project.pbxproj
+ax12OSCServer.xcodeproj/xcshareddata/xcschemes/arduino_AX12_controller2 Debug.xcscheme
+ax12OSCServer.xcodeproj/xcshareddata/xcschemes/arduino_AX12_controller2 Release.xcscheme
+
