@@ -13,19 +13,44 @@ void ofApp::setup(){
     
 	ofBackground(30, 30, 130);
     
+    dollHead = new DollHead();
+    
+#ifdef ARDUINO_PRESENT
     arduino = Arduino();
     arduino.setup();
+#endif
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
+    while(receiver.hasWaitingMessages()){
+        ofxOscMessage m;
+		receiver.getNextMessage(&m);
+
+        if(m.getAddress() == "/head/orientation/") {
+			float x = m.getArgAsFloat(0);
+			float y = m.getArgAsFloat(1);
+            float z = m.getArgAsFloat(2);
+            
+            dollHead->setDir(x, y, z);
+
+        }
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    serial.setup("/dev/tty.usbserial-A70060V8", 9600);
-	serial.startContinuousRead(false);
+    
+#ifdef ARDUINO_PRESENT
+    serial.setup("/dev/tty.usbserial-A70060V8", 9600); //TODO check: this in draw??
+	serial.startContinuousRead(false);                  //TODO check: this in draw??
+#endif
+    
+    
+    dollHead->render();
+    
+    
 }
 
 //--------------------------------------------------------------
@@ -42,7 +67,10 @@ void ofApp::keyPressed(int key){
 			message += "3";
 			break;
     }
+    
+#ifdef ARDUINO_PRESENT
     serial.writeString(message);
+#endif
 }
 
 //--------------------------------------------------------------

@@ -4,12 +4,15 @@
 #include "ofxSimpleSerial.h"
 #include "ofxOsc.h"
 #include <Arduino.h>
+#include "DollHead.h"
 
 // listen on port 12345
 #define PORT 12345
 #define NUM_MSG_STRINGS 20
 
-class ofApp : public ofBaseApp{
+// #define ARDUINO_PRESENT
+
+class ofApp : public ofBaseApp {
 
 	public:
 
@@ -38,5 +41,9 @@ class ofApp : public ofBaseApp{
         int mouseX, mouseY;
         string mouseButtonState;
     
+    DollHead *dollHead;
+    
+#ifdef ARDUINO_PRESENT
         Arduino arduino;
+#endif
 };
