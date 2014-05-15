@@ -17,6 +17,10 @@ public:
     DollHead();
     void setDir(ofVec3f dir);
     void setDir (float x, float y, float z);
+    
+    void setAngles(ofVec3f angles);
+    void setAngles (float pitch, float yaw, float roll);
+    
     void render();
     
     

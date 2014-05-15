@@ -28,14 +28,30 @@ void ofApp::update(){
         ofxOscMessage m;
 		receiver.getNextMessage(&m);
 
-        if(m.getAddress() == "/head/orientation/") {
+        if(m.getAddress() == "/head/orientationVector/") {
+            
+            cout << "/head/orientationVector/" << endl;
+            
+            
 			float x = m.getArgAsFloat(0);
 			float y = m.getArgAsFloat(1);
             float z = m.getArgAsFloat(2);
             
             dollHead->setDir(x, y, z);
-
+            
+        } else if (m.getAddress() == "/head/orientationAngles/") {
+            
+            cout << "/head/orientationAngles/";
+            
+            float pitch = m.getArgAsFloat(0); //up down
+            float yaw = m.getArgAsFloat(1); // left right
+            float roll = m.getArgAsFloat(2); // ear to shoulder left, ear to shoulder right :)
+            
+            cout << pitch << "/" << yaw << "/" << roll << endl;
+            
+            dollHead->setAngles (pitch, yaw, roll);
         }
+        
     }
 }
 

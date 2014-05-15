@@ -24,8 +24,26 @@ void DollHead::setDir (float x, float y, float z) {
     dir.z = z;
 }
 
+
+void DollHead::setAngles(ofVec3f angles) {
+    this->setAngles(angles[0], angles[1], angles[2]);
+}
+
+void DollHead::setAngles (float pitch, float yaw, float roll) {
+    pitch = ofDegToRad(pitch);
+    yaw = ofDegToRad(yaw);
+    roll = ofDegToRad(roll);
+    
+    dir.x = cos(yaw)*cos(pitch);
+    dir.y = sin(yaw)*cos(pitch);
+    dir.z = sin(pitch);
+}
+
+
+
 void DollHead::render() {
     ofPushMatrix();
+    ofTranslate(200, 200);
     ofRotateX(dir.x);
     ofRotateY(dir.y);
     ofRotateZ(dir.z);
