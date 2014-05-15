@@ -13,37 +13,44 @@
 // #define ARDUINO_PRESENT
 
 class ofApp : public ofBaseApp {
-
-	public:
-
-        ofxSimpleSerial	serial;
-		void setup();
-		void update();
-		void draw();
-
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
-		
-        ofTrueTypeFont font;
-        ofxOscReceiver receiver;
     
-        int current_msg_string;
-        string msg_strings[NUM_MSG_STRINGS];
-        float timers[NUM_MSG_STRINGS];
+public:
     
-        int mouseX, mouseY;
-        string mouseButtonState;
+    ofxSimpleSerial	serial;
+    void setup();
+    void update();
+    void draw();
+    
+    void keyPressed(int key);
+    void keyReleased(int key);
+    void mouseMoved(int x, int y );
+    void mouseDragged(int x, int y, int button);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void windowResized(int w, int h);
+    void dragEvent(ofDragInfo dragInfo);
+    void gotMessage(ofMessage msg);
+    
+    ofTrueTypeFont font;
+    ofxOscReceiver receiver;
+    
+    int current_msg_string;
+    string msg_strings[NUM_MSG_STRINGS];
+    float timers[NUM_MSG_STRINGS];
+    
+    int mouseX, mouseY;
+    string mouseButtonState;
+    
+    
     
     DollHead *dollHead;
+    ofEasyCam cam;
+	ofLight l1;
+	ofLight l2;
+
+    
     
 #ifdef ARDUINO_PRESENT
-        Arduino arduino;
+    Arduino arduino;
 #endif
 };

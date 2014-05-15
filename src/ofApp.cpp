@@ -13,6 +13,10 @@ void ofApp::setup(){
     
 	ofBackground(30, 30, 130);
     
+    
+	l1.setPosition(200, 300, 50);
+	l2.setPosition(-200, -200, 50);
+
     dollHead = new DollHead();
     
 #ifdef ARDUINO_PRESENT
@@ -28,26 +32,15 @@ void ofApp::update(){
         ofxOscMessage m;
 		receiver.getNextMessage(&m);
 
-        if(m.getAddress() == "/head/orientationVector/") {
+       if (m.getAddress() == "/head/orientationAngles/") {
             
-            cout << "/head/orientationVector/" << endl;
-            
-            
-			float x = m.getArgAsFloat(0);
-			float y = m.getArgAsFloat(1);
-            float z = m.getArgAsFloat(2);
-            
-            dollHead->setDir(x, y, z);
-            
-        } else if (m.getAddress() == "/head/orientationAngles/") {
-            
-            cout << "/head/orientationAngles/";
+        //    cout << "/head/orientationAngles/";
             
             float pitch = m.getArgAsFloat(0); //up down
             float yaw = m.getArgAsFloat(1); // left right
             float roll = m.getArgAsFloat(2); // ear to shoulder left, ear to shoulder right :)
             
-            cout << pitch << "/" << yaw << "/" << roll << endl;
+          //  cout << pitch << "/" << yaw << "/" << roll << endl;
             
             dollHead->setAngles (pitch, yaw, roll);
         }
@@ -64,7 +57,24 @@ void ofApp::draw(){
 #endif
     
     
+    ofDisableLighting();
+    ofBackground(0);
+
+
+    ofDrawBitmapString("angles: ", 20, 20);
+    ofDrawBitmapString(dollHead->toString(), 120, 20);
+
+    cam.begin();
+
+    ofEnableLighting();
+    ofEnableDepthTest();
+	l1.enable();
+	l2.enable();
+    
     dollHead->render();
+    
+    cam.end();
+
     
     
 }
