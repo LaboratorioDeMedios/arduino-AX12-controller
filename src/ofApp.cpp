@@ -32,7 +32,15 @@ void ofApp::update(){
         ofxOscMessage m;
 		receiver.getNextMessage(&m);
 
-       if (m.getAddress() == "/head/orientationAngles/") {
+        if (m.getAddress() == "/head/orientationDir/") {
+            float x = m.getArgAsFloat(0);
+            float y = m.getArgAsFloat(1);
+            float z = m.getArgAsFloat(2);
+            
+            dollHead->setDir(ofVec3f(x,y,z));
+            
+        }
+       else if (m.getAddress() == "/head/orientationAngles/") {
             
         //    cout << "/head/orientationAngles/";
             

@@ -19,6 +19,8 @@ public:
     void setAngles(ofVec3f angles);
     void setAngles (float pitch, float yaw, float roll);
     
+    void setDir (ofVec3f dir);
+    
     void render();
     
     string toString();

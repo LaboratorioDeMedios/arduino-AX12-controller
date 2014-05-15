@@ -41,8 +41,6 @@ public:
     int mouseX, mouseY;
     string mouseButtonState;
     
-    
-    
     DollHead *dollHead;
     ofEasyCam cam;
 	ofLight l1;

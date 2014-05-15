@@ -15,6 +15,17 @@ DollHead::DollHead() {
 }
 
 
+void DollHead::setDir(ofVec3f dir) {
+
+    this->yaw = atan(dir.x / dir.y);
+    
+    this->pitch = atan(sqrt(dir.x * dir.x + dir.y * dir.y) / dir.z);
+    
+    this->roll = 0;
+    
+}
+
+
 void DollHead::setAngles(ofVec3f angles) {
     this->setAngles(angles[0], angles[1], angles[2]);
 }
