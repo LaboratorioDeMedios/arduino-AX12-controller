@@ -11,6 +11,8 @@
 
 
 #include "ofMain.h"
+#include "ofx3DModelLoader.h"
+
 
 class DollHead {
 public:
@@ -30,6 +32,8 @@ private:
     float yaw;
     float roll;
     
+    ofx3DModelLoader headModel;
+
     
     
 };

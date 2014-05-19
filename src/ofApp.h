@@ -45,7 +45,11 @@ public:
     ofEasyCam cam;
 	ofLight l1;
 	ofLight l2;
+    
+    bool listening;
+    
 
+    float tempx, tempy, tempz;
     
     
 #ifdef ARDUINO_PRESENT

@@ -25,6 +25,9 @@
 		DCC00AF0AF749598D84DF9D7 /* ofxSimpleSerial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 379C327B5137D5DF940BDBB0 /* ofxSimpleSerial.cpp */; };
 		DE4B76BD19094F7B006850B7 /* Arduino.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE4B76BB19094F7B006850B7 /* Arduino.cpp */; };
 		E23C8A3F191929C600A5DE09 /* DollHead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E23C8A3D191929C600A5DE09 /* DollHead.cpp */; };
+		E2E3C060192AA50A0044026B /* model3DS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2E3C058192AA50A0044026B /* model3DS.cpp */; };
+		E2E3C061192AA50A0044026B /* texture3DS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2E3C05A192AA50A0044026B /* texture3DS.cpp */; };
+		E2E3C062192AA50A0044026B /* ofx3dModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2E3C05E192AA50A0044026B /* ofx3dModelLoader.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -114,6 +117,14 @@
 		DF49D76C45D5DB505A234880 /* ofxOscMessage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxOscMessage.cpp; path = ../../../addons/ofxOsc/src/ofxOscMessage.cpp; sourceTree = SOURCE_ROOT; };
 		E23C8A3D191929C600A5DE09 /* DollHead.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DollHead.cpp; sourceTree = "<group>"; };
 		E23C8A3E191929C600A5DE09 /* DollHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollHead.h; sourceTree = "<group>"; };
+		E2E3C058192AA50A0044026B /* model3DS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = model3DS.cpp; sourceTree = "<group>"; };
+		E2E3C059192AA50A0044026B /* model3DS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = model3DS.h; sourceTree = "<group>"; };
+		E2E3C05A192AA50A0044026B /* texture3DS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture3DS.cpp; sourceTree = "<group>"; };
+		E2E3C05B192AA50A0044026B /* texture3DS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture3DS.h; sourceTree = "<group>"; };
+		E2E3C05C192AA50A0044026B /* Vector3DS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3DS.h; sourceTree = "<group>"; };
+		E2E3C05D192AA50A0044026B /* ofx3DBaseLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofx3DBaseLoader.h; sourceTree = "<group>"; };
+		E2E3C05E192AA50A0044026B /* ofx3dModelLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofx3dModelLoader.cpp; sourceTree = "<group>"; };
+		E2E3C05F192AA50A0044026B /* ofx3DModelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofx3DModelLoader.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -241,6 +252,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				E2E3C055192AA50A0044026B /* ofx3DModelLoader */,
 				E6053AB7FEC63D5F83825B88 /* ofxOsc */,
 				30CFBB86EC7BF2803432D264 /* ofxSimpleSerial */,
 			);
@@ -302,6 +314,38 @@
 				30CB364908817057B430D528 /* osc */,
 			);
 			name = src;
+			sourceTree = "<group>";
+		};
+		E2E3C055192AA50A0044026B /* ofx3DModelLoader */ = {
+			isa = PBXGroup;
+			children = (
+				E2E3C056192AA50A0044026B /* src */,
+			);
+			name = ofx3DModelLoader;
+			path = ../../../addons/ofx3DModelLoader;
+			sourceTree = "<group>";
+		};
+		E2E3C056192AA50A0044026B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E2E3C057192AA50A0044026B /* 3DS */,
+				E2E3C05D192AA50A0044026B /* ofx3DBaseLoader.h */,
+				E2E3C05E192AA50A0044026B /* ofx3dModelLoader.cpp */,
+				E2E3C05F192AA50A0044026B /* ofx3DModelLoader.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		E2E3C057192AA50A0044026B /* 3DS */ = {
+			isa = PBXGroup;
+			children = (
+				E2E3C058192AA50A0044026B /* model3DS.cpp */,
+				E2E3C059192AA50A0044026B /* model3DS.h */,
+				E2E3C05A192AA50A0044026B /* texture3DS.cpp */,
+				E2E3C05B192AA50A0044026B /* texture3DS.h */,
+				E2E3C05C192AA50A0044026B /* Vector3DS.h */,
+			);
+			path = 3DS;
 			sourceTree = "<group>";
 		};
 		E4328144138ABC890047C5CB /* Products */ = {
@@ -471,11 +515,13 @@
 				DE4B76BD19094F7B006850B7 /* Arduino.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				E2E3C062192AA50A0044026B /* ofx3dModelLoader.cpp in Sources */,
 				72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */,
 				5864AD82E20F15536D054EA3 /* ofxOscMessage.cpp in Sources */,
 				4ADB88E2FB52E76A471065DE /* ofxOscParameterSync.cpp in Sources */,
 				640279EE111671BD026CB013 /* ofxOscReceiver.cpp in Sources */,
 				8F5205AEF8861EF234F0651A /* ofxOscSender.cpp in Sources */,
+				E2E3C061192AA50A0044026B /* texture3DS.cpp in Sources */,
 				ADE367465D2A8EBAD4C7A8D9 /* IpEndpointName.cpp in Sources */,
 				67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */,
 				510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */,
@@ -484,6 +530,7 @@
 				28090DEB5109115003E8F1C5 /* UdpSocketWin.cpp in Sources */,
 				62545D179C94265CA1389D4A /* OscOutboundPacketStream.cpp in Sources */,
 				C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */,
+				E2E3C060192AA50A0044026B /* model3DS.cpp in Sources */,
 				0546D1A38E13BD319CC9755B /* OscReceivedElements.cpp in Sources */,
 				879A251454401BC0B6E4F238 /* OscTypes.cpp in Sources */,
 				DCC00AF0AF749598D84DF9D7 /* ofxSimpleSerial.cpp in Sources */,

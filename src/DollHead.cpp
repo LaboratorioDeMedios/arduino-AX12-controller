@@ -12,6 +12,13 @@
 DollHead::DollHead() {
     pitch = roll = yaw = 0;
     
+//    headModel.loadModel("bolvanka.3ds", 2);
+    //    headModel.loadModel("skull.3ds", 20);
+        headModel.loadModel("NewSquirrel.3ds", 20);
+    
+    
+    
+    
 }
 
 
@@ -31,9 +38,9 @@ void DollHead::setAngles(ofVec3f angles) {
 }
 
 void DollHead::setAngles (float pitch, float yaw, float roll) {
-    this->pitch = pitch; // ofDegToRad(pitch);
-    this->yaw = yaw; // ofDegToRad(yaw);
-    this->roll = roll; // ofDegToRad(roll);
+    this->pitch = pitch;
+    this->yaw = yaw;
+    this->roll = roll; 
 }
 
 string DollHead::toString() {
@@ -51,6 +58,11 @@ void DollHead::render() {
     ofRotateX(pitch);
     ofRotateY(yaw);
     ofRotateZ(roll);
-    ofDrawBox(100);
+//    ofDrawBox(100);
+    
+    ofSetColor(255, 255, 255, 255);
+    
+    headModel.draw();
+    
     ofPopMatrix();
 }
