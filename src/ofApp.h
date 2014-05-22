@@ -10,7 +10,7 @@
 #define PORT 12345
 #define NUM_MSG_STRINGS 20
 
-// #define ARDUINO_PRESENT
+#define ARDUINO_PRESENT 1
 
 class ofApp : public ofBaseApp {
 

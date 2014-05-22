@@ -15,10 +15,8 @@ void ofApp::setup(){
     
     dollHead = new DollHead();
     
-#ifdef ARDUINO_PRESENT
     arduino = Arduino();
     arduino.setup();
-#endif
 }
 
 //--------------------------------------------------------------
@@ -41,36 +39,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
-#ifdef ARDUINO_PRESENT
-    serial.setup("/dev/tty.usbserial-A70060V8", 9600); //TODO check: this in draw??
-	serial.startContinuousRead(false);                  //TODO check: this in draw??
-#endif
-    
-    
     dollHead->render();
-    
-    
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    string message;
-    switch (key) {
-		case 49: // 1
-			message += "a";
-			break;
-        case 50: // 2
-			message += "?";
-			break;
-		case 51: // 3
-			message += "3";
-			break;
-    }
-    
-#ifdef ARDUINO_PRESENT
-    serial.writeString(message);
-#endif
+    arduino.keyPressed(key);
 }
 
 //--------------------------------------------------------------

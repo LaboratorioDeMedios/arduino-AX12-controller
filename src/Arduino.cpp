@@ -20,24 +20,24 @@
 	static char		ANGLE_DEFAULT_4					= 0;
 	static char		ANGLE_DEFAULT_8					= 0;
     
-	static int		ANGLE_MAX_1						= 30;
-	static int		ANGLE_MIN_1						= -30;
+	static int		ANGLE_MAX_1						= 127;
+	static int		ANGLE_MIN_1						= -127;
 	static int		ANGLE_MAX_2						= 127;
 	static int		ANGLE_MIN_2						= -127;
-	static int		ANGLE_MAX_4						= 10;
-	static int		ANGLE_MIN_4						= -70;
+	static int		ANGLE_MAX_4						= 127;
+	static int		ANGLE_MIN_4						= -127;
     
 	// optional - for debug
 	static char		KEY_RESET						= 0;
 	static char		KEY_PRINT_STATUS				= 0;
     
 	static int		ANGLE_STEP_FOR_KEY				= 4;
-	static char		KEY_ANGLE_1INC					= 0;
-	static char		KEY_ANGLE_1DEC					= 0;
-	static char		KEY_ANGLE_2INC					= 0;
-	static char		KEY_ANGLE_2DEC					= 0;
-	static char		KEY_ANGLE_4INC					= 0;
-	static char		KEY_ANGLE_4DEC					= 0;
+	static char		KEY_ANGLE_1INC					= 'a';
+	static char		KEY_ANGLE_1DEC					= 'z';
+	static char		KEY_ANGLE_2INC					= 's';
+	static char		KEY_ANGLE_2DEC					= 'x';
+	static char		KEY_ANGLE_4INC					= 'd';
+	static char		KEY_ANGLE_4DEC					= 'c';
     
 	static unsigned long startTime;
     
@@ -61,13 +61,13 @@
 		angleMotor2 = ANGLE_DEFAULT_2;
 		angleMotor4 = ANGLE_DEFAULT_4;
         
-		if (!serial.setup(0, 9600)) {
+        vector< ofSerialDeviceInfo > lista = serial.getDeviceList();
+        
+		if (!serial.setup(1, 9600)) {
 			cout << "Error en setup del Serial, puerto COM: " << COM_PORT << endl;
 			//return false;
 		}
-        
-		cout << "Moviendo los motores" << endl;
-        
+
 		sendMotor((char) angleMotor1, ID_MOTOR_1);
 		sendMotor((char) angleMotor2, ID_MOTOR_2);
 		sendMotor((char) angleMotor4, ID_MOTOR_4);
@@ -98,21 +98,21 @@
 			switch (key)
 			{
 				case '0':
-					reset(true); // Vuelve a la posición inicial, resetea la matriz de transformación y no aplica ICP
+					reset(true);
 					break;
 			}
 			if (key == KEY_ANGLE_1INC) {
-				moveMotor(1,angleMotor1 + ANGLE_STEP_FOR_KEY);
+				moveMotor(1, angleMotor1 + ANGLE_STEP_FOR_KEY);
 			} else if (key == KEY_ANGLE_1DEC) {
-				moveMotor(1,angleMotor1 - ANGLE_STEP_FOR_KEY);
+				moveMotor(1, angleMotor1 - ANGLE_STEP_FOR_KEY);
 			} else if (key == KEY_ANGLE_2INC) {
-				moveMotor(2,angleMotor2 + ANGLE_STEP_FOR_KEY);
+				moveMotor(2, angleMotor2 + ANGLE_STEP_FOR_KEY);
 			} else if (key == KEY_ANGLE_2DEC) {
-				moveMotor(2,angleMotor2 - ANGLE_STEP_FOR_KEY);
+				moveMotor(2, angleMotor2 - ANGLE_STEP_FOR_KEY);
 			} else if (key == KEY_ANGLE_4INC) {
-				moveMotor(4,angleMotor4 + ANGLE_STEP_FOR_KEY);
+				moveMotor(4, angleMotor4 + ANGLE_STEP_FOR_KEY);
 			} else if (key == KEY_ANGLE_4DEC) {
-				moveMotor(4,angleMotor4 - ANGLE_STEP_FOR_KEY);
+				moveMotor(4, angleMotor4 - ANGLE_STEP_FOR_KEY);
 			}
 			else if (key == KEY_RESET) {
 				reset(false);
@@ -167,7 +167,6 @@
 	int Arduino::moveMotor(int motorId, signed int degrees)
 	{
 		int error = 1;
-		signed int angle1 = angleMotor1, angle2 = angleMotor2, angle4 = angleMotor4;
         
 		if (motorId == ID_MOTOR_1)
 		{
@@ -177,7 +176,7 @@
 			}
 			else
 			{
-				angle1 = degrees;
+				angleMotor1 += degrees;
 			}
 		}
 		if (motorId == ID_MOTOR_2)
@@ -188,7 +187,7 @@
 			}
 			else
 			{
-				angle2 = degrees;
+				angleMotor2 += degrees;
 			}
 		}
 		if (motorId == ID_MOTOR_4)
@@ -199,11 +198,12 @@
 			}
 			else
 			{
-				angle4 = degrees;
+				angleMotor4 += degrees;
 			}
 		}
         
 		sendMotor(angleMotor1, ID_MOTOR_1);
 		sendMotor(angleMotor2, ID_MOTOR_2);
 		sendMotor(angleMotor4, ID_MOTOR_4);
+        cout << "Info " << this->read() << endl;
 	}
