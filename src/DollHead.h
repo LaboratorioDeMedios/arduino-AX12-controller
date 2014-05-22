@@ -11,17 +11,30 @@
 
 
 #include "ofMain.h"
+#include "ofx3DModelLoader.h"
+
 
 class DollHead {
 public:
     DollHead();
-    void setDir(ofVec3f dir);
-    void setDir (float x, float y, float z);
+    
+    void setAngles(ofVec3f angles);
+    void setAngles (float pitch, float yaw, float roll);
+    
+    void setDir (ofVec3f dir);
+    
     void render();
     
+    string toString();
     
 private:
-    ofVec3f dir;
+    float pitch;
+    float yaw;
+    float roll;
+    
+    ofx3DModelLoader headModel;
+
+    
     
 };
 

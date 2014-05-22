@@ -10,25 +10,59 @@
 
 
 DollHead::DollHead() {
-    dir = ofVec3f(0,0,0);
+    pitch = roll = yaw = 0;
+    
+//    headModel.loadModel("bolvanka.3ds", 2);
+    //    headModel.loadModel("skull.3ds", 20);
+        headModel.loadModel("NewSquirrel.3ds", 20);
+    
+    
+    
     
 }
 
+
 void DollHead::setDir(ofVec3f dir) {
-    this->dir = dir;
+
+    this->yaw = atan(dir.x / dir.y);
+    
+    this->pitch = atan(sqrt(dir.x * dir.x + dir.y * dir.y) / dir.z);
+    
+    this->roll = 0;
+    
 }
 
-void DollHead::setDir (float x, float y, float z) {
-    dir.x = x;
-    dir.y = y;
-    dir.z = z;
+
+void DollHead::setAngles(ofVec3f angles) {
+    this->setAngles(angles[0], angles[1], angles[2]);
 }
+
+void DollHead::setAngles (float pitch, float yaw, float roll) {
+    this->pitch = pitch;
+    this->yaw = yaw;
+    this->roll = roll; 
+}
+
+string DollHead::toString() {
+    std::stringstream ss;
+    ss << pitch << ", " << yaw << ", " << roll;
+    std::string s = ss.str();
+
+    return ofToString(s);
+    
+}
+
 
 void DollHead::render() {
     ofPushMatrix();
-    ofRotateX(dir.x);
-    ofRotateY(dir.y);
-    ofRotateZ(dir.z);
-    ofDrawBox(100);
+    ofRotateX(pitch);
+    ofRotateY(yaw);
+    ofRotateZ(roll);
+//    ofDrawBox(100);
+    
+    ofSetColor(255, 255, 255, 255);
+    
+    headModel.draw();
+    
     ofPopMatrix();
 }

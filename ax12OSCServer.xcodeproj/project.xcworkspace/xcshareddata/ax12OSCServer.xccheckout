@@ -10,6 +10,8 @@
 	<string>ax12OSCServer</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>BBD6B262-FA3D-427A-85EE-0571AA39A0A9</key>
+		<string>https://github.com/LeoColomb/ofxSimpleSerial</string>
 		<key>C9EEF22B-BBE1-4857-A99A-4807730CDB4D</key>
 		<string>http://github.com/LaboratorioDeMedios/arduino-AX12-controller</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>ax12OSCServer.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>BBD6B262-FA3D-427A-85EE-0571AA39A0A9</key>
+		<string>../../../../../addons/ofxSimpleSerial</string>
 		<key>C9EEF22B-BBE1-4857-A99A-4807730CDB4D</key>
 		<string>../..</string>
 	</dict>
@@ -35,6 +39,14 @@
 			<string>C9EEF22B-BBE1-4857-A99A-4807730CDB4D</string>
 			<key>IDESourceControlWCCName</key>
 			<string>arduino-AX12-controller</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BBD6B262-FA3D-427A-85EE-0571AA39A0A9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxSimpleSerial</string>
 		</dict>
 	</array>
 </dict>
