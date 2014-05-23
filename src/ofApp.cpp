@@ -104,7 +104,6 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     arduino.keyPressed(key);
     string message;
-    cout << tempx << " " << tempy << " " << tempz << endl;
     switch (key) {
         case 'q': tempx -= 10; break;
         case '1': tempx += 10; break;

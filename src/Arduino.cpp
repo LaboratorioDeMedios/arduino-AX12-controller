@@ -176,7 +176,7 @@
 			}
 			else
 			{
-				angleMotor1 += degrees;
+				angleMotor1 = degrees;
 			}
 		}
 		if (motorId == ID_MOTOR_2)
@@ -187,7 +187,7 @@
 			}
 			else
 			{
-				angleMotor2 += degrees;
+				angleMotor2 = degrees;
 			}
 		}
 		if (motorId == ID_MOTOR_4)
@@ -198,12 +198,12 @@
 			}
 			else
 			{
-				angleMotor4 += degrees;
+				angleMotor4 = degrees;
 			}
 		}
         
 		sendMotor(angleMotor1, ID_MOTOR_1);
 		sendMotor(angleMotor2, ID_MOTOR_2);
 		sendMotor(angleMotor4, ID_MOTOR_4);
-        cout << "Info " << this->read() << endl;
+        cout << this->read() << endl;
 	}
