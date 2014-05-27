@@ -22,7 +22,7 @@ void ofApp::setup(){
 
     // pitch: 20.2041 heading: 0.343797 roll: 95.8658
 
-    listening = false;
+    listening = true;
 
     arduino = Arduino();
     arduino.setup();
@@ -63,6 +63,14 @@ void ofApp::update(){
         float roll = tempz;
         dollHead->setAngles (pitch, yaw, roll);
     }
+    
+    signed int pitch = (signed int)dollHead->getPitch();
+    signed int yaw = (signed int)dollHead->getYaw();
+    signed int roll = (signed int)dollHead->getRoll();
+    
+    arduino.moveMotor(1, pitch);
+    arduino.moveMotor(2, yaw);
+    arduino.moveMotor(4, roll);
     
 }
 

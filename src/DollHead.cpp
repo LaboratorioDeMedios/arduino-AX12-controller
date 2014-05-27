@@ -66,3 +66,15 @@ void DollHead::render() {
     
     ofPopMatrix();
 }
+
+float DollHead::getPitch(){
+    return this->pitch;
+};
+
+float DollHead::getYaw(){
+    return this->yaw;
+};
+
+float DollHead::getRoll(){
+    return this->roll;
+};

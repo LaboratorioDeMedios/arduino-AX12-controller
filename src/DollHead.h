@@ -27,6 +27,10 @@ public:
     
     string toString();
     
+    float getPitch();
+    float getYaw();
+    float getRoll();
+    
 private:
     float pitch;
     float yaw;
