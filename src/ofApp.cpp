@@ -105,13 +105,14 @@ void ofApp::keyPressed(int key){
     arduino.keyPressed(key);
     string message;
     cout << tempx << " " << tempy << " " << tempz << endl;
+    int step = 10;
     switch (key) {
-        case 'q': tempx -= 10; break;
-        case '1': tempx += 10; break;
-        case '2': tempy += 10; break;
-        case 'w': tempy -= 10; break;
-        case '3': tempz += 10; break;
-        case 'e': tempz -= 10; break;
+        case 'q': tempx -= step; break;
+        case '1': tempx += step; break;
+        case '2': tempy += step; break;
+        case 'w': tempy -= step; break;
+        case '3': tempz += step; break;
+        case 'e': tempz -= step; break;
         case 'l': listening = !listening; break;
     }
 }

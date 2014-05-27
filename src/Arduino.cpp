@@ -101,6 +101,9 @@
 					reset(true);
 					break;
 			}
+            
+            // ToDO change this to case :D
+            
 			if (key == KEY_ANGLE_1INC) {
 				moveMotor(1, angleMotor1 + ANGLE_STEP_FOR_KEY);
 			} else if (key == KEY_ANGLE_1DEC) {
