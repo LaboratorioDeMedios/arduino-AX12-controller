@@ -10,7 +10,7 @@
 #define PORT 12345
 #define NUM_MSG_STRINGS 20
 
-#define ARDUINO_PRESENT 1
+#define ARDUINO_PRESENT
 
 class ofApp : public ofBaseApp {
     
@@ -49,7 +49,7 @@ public:
     bool listening;
     
 
-    float tempx, tempy, tempz;
+    float tempPitch, tempYaw, tempRoll;
     
     
 #ifdef ARDUINO_PRESENT
