@@ -22,7 +22,7 @@ void ofApp::setup(){
 
     // pitch: 20.2041 heading: 0.343797 roll: 95.8658
 
-    listening = false;
+    listening = true;
 
     arduino = Arduino();
     arduino.setup();
@@ -64,6 +64,14 @@ void ofApp::update(){
         dollHead->setAngles (pitch, yaw, roll);
     }
     
+    signed int pitch = (signed int)dollHead->getPitch();
+    signed int yaw = (signed int)dollHead->getYaw();
+    signed int roll = (signed int)dollHead->getRoll();
+    
+    arduino.moveMotor(1, pitch);
+    arduino.moveMotor(2, yaw);
+    arduino.moveMotor(4, roll);
+    
 }
 
 //--------------------------------------------------------------
@@ -104,15 +112,13 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     arduino.keyPressed(key);
     string message;
-    cout << tempx << " " << tempy << " " << tempz << endl;
-    int step = 10;
     switch (key) {
-        case 'q': tempx -= step; break;
-        case '1': tempx += step; break;
-        case '2': tempy += step; break;
-        case 'w': tempy -= step; break;
-        case '3': tempz += step; break;
-        case 'e': tempz -= step; break;
+        case 'q': tempx -= 10; break;
+        case '1': tempx += 10; break;
+        case '2': tempy += 10; break;
+        case 'w': tempy -= 10; break;
+        case '3': tempz += 10; break;
+        case 'e': tempz -= 10; break;
         case 'l': listening = !listening; break;
     }
 }
