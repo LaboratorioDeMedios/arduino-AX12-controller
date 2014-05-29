@@ -13,8 +13,8 @@ DollHead::DollHead() {
     pitch = roll = yaw = 0;
     
 //    headModel.loadModel("bolvanka.3ds", 2);
-    //    headModel.loadModel("skull.3ds", 20);
-        headModel.loadModel("NewSquirrel.3ds", 20);
+//    headModel.loadModel("skull.3ds", 20);
+      headModel.loadModel("NewSquirrel.3ds", 20);
     
     
     

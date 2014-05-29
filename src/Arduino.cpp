@@ -29,7 +29,7 @@
     
 	// optional - for debug
 	static char		KEY_RESET						= 0;
-	static char		KEY_PRINT_STATUS				= 0;
+	static char		KEY_PRINT_STATUS				= ' ';
     
 	static int		ANGLE_STEP_FOR_KEY				= 4;
 	static char		KEY_ANGLE_1INC					= 'a';
@@ -102,7 +102,7 @@
 					break;
 			}
             
-            // ToDO change this to case :D
+            // TODO change this to switch case
             
 			if (key == KEY_ANGLE_1INC) {
 				moveMotor(1, angleMotor1 + ANGLE_STEP_FOR_KEY);

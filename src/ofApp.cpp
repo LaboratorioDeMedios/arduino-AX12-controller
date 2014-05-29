@@ -11,6 +11,8 @@ void ofApp::setup(){
 	mouseY = 0;
 	mouseButtonState = "";
     
+    ofSetFrameRate(24);
+    
 	ofBackground(30, 30, 130);
     
 	l1.setPosition(200, 300, 50);
@@ -23,6 +25,7 @@ void ofApp::setup(){
     // pitch: 20.2041 heading: 0.343797 roll: 95.8658
     
     listening = true;
+    keyboardMotorTest = true;
     
 #ifdef ARDUINO_PRESENT    
     arduino = Arduino();
@@ -68,9 +71,11 @@ void ofApp::update(){
     signed int roll = (signed int)dollHead->getRoll();
     
 #ifdef ARDUINO_PRESENT
-    arduino.moveMotor(1, pitch);
-    arduino.moveMotor(2, yaw);
-    arduino.moveMotor(4, roll);
+    if (!keyboardMotorTest) {
+        arduino.moveMotor(1, pitch);
+        arduino.moveMotor(2, yaw);
+        arduino.moveMotor(4, roll);
+    }
 #endif
     
 }
@@ -85,6 +90,13 @@ void ofApp::draw(){
     
     ofDrawBitmapString("angles: ", 20, 20);
     ofDrawBitmapString(dollHead->toString(), 120, 20);
+    
+    ofDrawBitmapString("listening OSC: ", 20, 40);
+    ofDrawBitmapString(ofToString(listening), 140, 40);
+    
+    ofDrawBitmapString("keyboard test: ", 20, 60);
+    ofDrawBitmapString(ofToString(keyboardMotorTest), 140, 60);
+    
     
     //cam.begin();
     
@@ -125,6 +137,7 @@ void ofApp::keyPressed(int key){
         case '3': tempRoll += 10; break;
         case 'e': tempRoll -= 10; break;
         case 'l': listening = !listening; break;
+        case 'k': keyboardMotorTest = !keyboardMotorTest; break;
     }
 }
 

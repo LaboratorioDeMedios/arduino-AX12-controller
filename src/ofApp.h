@@ -47,7 +47,7 @@ public:
 	ofLight l2;
     
     bool listening;
-    
+    bool keyboardMotorTest;
 
     float tempPitch, tempYaw, tempRoll;
     
