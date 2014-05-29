@@ -105,9 +105,9 @@ void loop()
     }
   }
   delay(5);
-  motor1.setPosVel (posicion1, 30);
+  motor1.setPosVel (posicion1, 230);
   delay(5);
-  motor2.setPosVel (posicion2, 30);
+  motor2.setPosVel (posicion2, 230);
   delay(5);
-  motor4.setPosVel (posicion4, 30);
+  motor4.setPosVel (posicion4, 230);
 }

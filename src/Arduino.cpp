@@ -31,7 +31,7 @@
 	static char		KEY_RESET						= 0;
 	static char		KEY_PRINT_STATUS				= ' ';
     
-	static int		ANGLE_STEP_FOR_KEY				= 4;
+	static int		ANGLE_STEP_FOR_KEY				= 24;
 	static char		KEY_ANGLE_1INC					= 'a';
 	static char		KEY_ANGLE_1DEC					= 'z';
 	static char		KEY_ANGLE_2INC					= 's';
