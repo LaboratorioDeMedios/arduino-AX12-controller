@@ -1,3 +1,46 @@
+Como mover la DollHead por OSC
+================================
+
+Formato OSC:
+    ofxOscMessage m;
+    m.setAddress("/head/orientationAngles/");
+    m.addFloatArg(PITCH);
+    m.addFloatArg(YAW);
+    m.addFloatArg(ROLL);
+
+
+Movimientos por motor
+Pitch = (movimiento SI) = MOTOR 1
+Yaw = (movimiento NO) = MOTOR 2
+Roll = (movimiento MASO)  = MOTOR 4
+
+Rangos y signos:
+
+Pitch
+-50 ---------------------------- 0 ---------------------------- +50
+Arriba                      Frente                          Abajo
+
+Yaw
+-90 ---------------------------- 0 ---------------------------- +90
+Derecha                    Frente                        Izquierda
+
+
+Roll
+-65 ---------------------------- 0 ---------------------------- +65
+Derecha                    Frente                        Izquierda
+
+
+Cuando dice Izquierda/Derecha se refiere a la izquierda/derecha desde la cabeza (se asume como obvio darse cuenta para dónde está mirando la cabeza)
+
+Si se pasan valores fuera de rango, se interpreta como si se hubiera pasado el extremo correspondiente. Si se envía (70,120,-400) interpreta (50,90,-65).
+
+
+
+
+
+
+
+
 arduino-AX12-controller
 =======================
 
