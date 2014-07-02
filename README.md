@@ -1,12 +1,11 @@
-Como mover la DollHead por OSC
-================================
+Como enviar via OSC
+-------------------
 
-Formato OSC:
-    ofxOscMessage m;
-    m.setAddress("/head/orientationAngles/");
-    m.addFloatArg(PITCH);
-    m.addFloatArg(YAW);
-    m.addFloatArg(ROLL);
+Formato OSC:ofxOscMessage m;
+m.setAddress("/head/orientationAngles/");
+m.addFloatArg(PITCH);
+m.addFloatArg(YAW);
+m.addFloatArg(ROLL);
 
 
 Movimientos por motor
